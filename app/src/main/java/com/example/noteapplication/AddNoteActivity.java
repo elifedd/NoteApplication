@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -34,9 +35,12 @@ public class AddNoteActivity extends AppCompatActivity {
         addNoteBtn = findViewById(R.id.addNoteBtn);
 
         calendar = Calendar.getInstance();
-        todayDate = calendar.get(Calendar.YEAR) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
-        currentTime = pad(calendar.get(Calendar.HOUR)) + ":" + pad(calendar.get(Calendar.MINUTE));
-        Log.d("Calender", "Date and Time: " + todayDate + " and " + currentTime);
+        TimeZone timeZone = TimeZone.getDefault();
+        calendar.setTimeZone(timeZone);
+
+        todayDate = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
+        currentTime = pad(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + pad(calendar.get(Calendar.MINUTE));
+        Log.d("Calendar", "Date and Time: " + todayDate + " and " + currentTime);
 
         addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +58,7 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     public String pad(int i) {
-        if(i < 0)
+        if (i < 10)
             return "0" + i;
         return String.valueOf(i);
     }
@@ -65,7 +69,6 @@ public class AddNoteActivity extends AppCompatActivity {
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
