@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -21,6 +22,8 @@ public class AddNoteActivity extends AppCompatActivity {
     Button addNoteBtn;
     String todayDate, currentTime;
     Calendar calendar;
+
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
