@@ -2,6 +2,7 @@ package com.example.noteapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
@@ -81,5 +82,25 @@ public class NoteDatabase extends SQLiteOpenHelper {
             } while(cursor.moveToNext());
         }
         return allNotes;
+    }
+
+    public NoteModel getNotes(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        String[] query = new String[] {COLUMN_ID, COLUMN_TITLE, COLUMN_DETAILS, COLUMN_DATE, COLUMN_TIME};
+        Cursor cursor = db.query(DATABASE_TABLE, query, COLUMN_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+        if(cursor != null)
+            cursor.moveToFirst();
+        return new NoteModel(
+                Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4));
+    }
+
+    void deleteNote(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        db.delete(DATABASE_TABLE, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
     }
 }

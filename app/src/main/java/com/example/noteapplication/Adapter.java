@@ -1,6 +1,7 @@
 package com.example.noteapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(itemView.getContext(), "Item Clicked", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                    intent.putExtra("ID", noteModels.get(getAdapterPosition()).getId());
+                    itemView.getContext().startActivity(intent);
                 }
             });
         }
