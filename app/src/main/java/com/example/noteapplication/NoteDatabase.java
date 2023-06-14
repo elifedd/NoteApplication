@@ -2,11 +2,15 @@ package com.example.noteapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteDatabase extends SQLiteOpenHelper {
 
@@ -55,5 +59,27 @@ public class NoteDatabase extends SQLiteOpenHelper {
         long ID = db.insert(DATABASE_TABLE, null, cv);
         Log.d("Inserted", "ID -> " + ID);
         return ID;
+    }
+
+    public List<NoteModel> getNotes(){
+        SQLiteDatabase db = getReadableDatabase();
+        List<NoteModel> allNotes = new ArrayList<>();
+
+        String query = "SELECT * FROM " + DATABASE_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                NoteModel noteModel = new NoteModel();
+                noteModel.setId(cursor.getInt(0));
+                noteModel.setNoteTitle(cursor.getString(1));
+                noteModel.setNoteDetails(cursor.getString(2));
+                noteModel.setNoteDate(cursor.getString(3));
+                noteModel.setNoteTime(cursor.getString(4));
+
+                allNotes.add(noteModel);
+            } while(cursor.moveToNext());
+        }
+        return allNotes;
     }
 }
