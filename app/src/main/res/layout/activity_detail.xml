@@ -5,26 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity"
+    android:background="@drawable/back"
+    android:backgroundTint="#8DFFEB3B"
+    android:padding="15dp"
     android:layout_margin="15dp">
-
 
     <TextView
         android:id="@+id/showTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Title Demo"
-        android:textSize="20sp"
+        android:text="Note Title"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/showDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Details demo"
-        android:textSize="20sp"
+        android:text="Note Details"
+        android:textSize="18sp"
+        android:textColor="#808080"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/showTitle"
+        android:layout_marginTop="8dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
